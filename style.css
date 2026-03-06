@@ -1,0 +1,355 @@
+:root {
+    --glass: rgba(255, 255, 255, 0.1);
+    --glass-heavy: rgba(255, 255, 255, 0.2);
+    --glass-border: rgba(255, 255, 255, 0.15);
+    --text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+* { box-sizing: border-box; }
+
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    overflow: hidden;
+    background: url('images/background.png'), url('https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=1974&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center;
+}
+
+#desktop {
+    height: calc(100vh - 48px);
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    gap: 15px;
+    position: relative;
+}
+
+.icon {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 12px;
+    border: 1px solid transparent;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    user-select: none;
+}
+
+.icon:hover {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(5px);
+}
+
+.icon:active {
+    background: var(--glass-heavy);
+    transform: scale(0.92);
+}
+
+.icon img {
+    width: 52px;
+    height: 52px;
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
+    margin-bottom: 8px;
+}
+
+.icon span {
+    color: white;
+    font-size: 12px;
+    font-weight: 500;
+    text-align: center;
+    text-shadow: var(--text-shadow);
+    padding: 2px 6px;
+    max-width: 95%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.trash-bin {
+    position: absolute !important;
+    bottom: 30px;
+    right: 30px;
+}
+
+#taskbar {
+    height: 48px;
+    background: rgba(15, 15, 15, 0.75);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 12px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    z-index: 9999;
+}
+
+.taskbar-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.restart-btn {
+    background: none;
+    border: none;
+    padding: 6px;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background 0.2s;
+}
+
+.restart-btn:hover { background: var(--glass); }
+.restart-btn svg { fill: white; width: 22px; height: 22px; opacity: 0.9; }
+
+.birthday-banner {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-left: 10px;
+}
+
+.system-tray {
+    padding: 0 8px;
+    color: white;
+    text-align: right;
+    cursor: default;
+}
+
+#clock-time { font-weight: 600; font-size: 13px; }
+#clock-date { font-size: 11px; opacity: 0.6; }
+
+.window {
+    display: none;
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.9);
+    width: 520px;
+    background: rgba(25, 25, 25, 0.9);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+    overflow: hidden;
+    z-index: 10000;
+    transition: all 0.3s ease;
+}
+
+.window-header {
+    padding: 10px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255,255,255,0.03);
+    color: #efefef;
+    font-size: 13px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.close-btn {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.close-btn:hover { background: #c42b1c; }
+
+.window-content {
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+}
+
+.window-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 6px;
+}
+
+/* Add to your style.css */
+
+.text-content {
+    flex-direction: column;
+    align-items: flex-start !important;
+    padding: 20px;
+    color: #fff;
+    max-height: 400px;
+    overflow-y: auto;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.text-content p {
+    margin: 5px 0;
+    line-height: 1.4;
+}
+
+.text-content hr {
+    width: 100%;
+    border: 0;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    margin: 15px 0;
+}
+
+pre {
+    margin: 0;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    color: #ffd700; /* Taco gold! */
+}
+
+/* Custom Scrollbar for the glass effect */
+.text-content::-webkit-scrollbar {
+    width: 8px;
+}
+.text-content::-webkit-scrollbar-track {
+    background: transparent;
+}
+.text-content::-webkit-scrollbar-thumb {
+    background: var(--glass-heavy);
+    border-radius: 4px;
+}
+
+/* Add/Update in your style.css */
+
+.icon-wrap span {
+    white-space: normal !important; /* Allows text to wrap */
+    word-wrap: break-word;
+    line-height: 1.2;
+    height: auto;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Limits to 2 lines so it doesn't look messy */
+    -webkit-box-orient: vertical;
+}
+
+/* Ensure the icon container can grow slightly for the extra line */
+.icon {
+    min-height: 100px;
+    height: auto;
+    padding: 10px 5px;
+}
+
+/* Hidden button for the secret hint */
+.hidden-trigger {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 200px; /* Adjust to hide it somewhere random */
+    left: 400px;
+    cursor: default;
+    opacity: 0; /* Change to 0.1 during testing so you can find it */
+}
+
+/* Virus Window Specifics */
+.virus-theme { border: 2px solid #ff5f56 !important; width: 450px; }
+.virus-body { flex-direction: column; padding: 20px; }
+.alert-text { color: #ff5f56; font-weight: bold; margin-bottom: 15px; text-align: center; }
+.input-group { display: flex; flex-direction: column; gap: 10px; margin-bottom: 15px; }
+.input-group input { 
+    background: rgba(0,0,0,0.5); border: 1px solid #444; color: #0f0; 
+    padding: 8px; border-radius: 4px; font-family: monospace; 
+}
+.action-btn { background: #0088cc; padding: 12px; font-weight: bold; width: 100%; color: white; border: none; border-radius: 4px; cursor: pointer; }
+.terminal-log { margin-top: 15px; background: #000; height: 80px; font-family: monospace; font-size: 10px; color: #0f0; padding: 5px; overflow-y: hidden; border: 1px solid #333; }
+.hint-text { font-size: 0.85em; opacity: 0.6; font-style: italic; margin-top: 10px; }
+
+/* The Invisible Icon */
+.secret-trigger {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background: transparent;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+/* Grand Birthday Popup */
+.grand-popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(20px);
+    z-index: 20000;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.grand-content {
+    text-align: center;
+    color: white;
+    animation: celebrate 0.5s cubic-bezier(0.17, 0.89, 0.32, 1.49);
+}
+
+.grand-content h1 {
+    font-size: 5rem;
+    background: linear-gradient(to right, #ff0080, #ff8c00, #40e0d0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+    margin-bottom: 20px;
+}
+
+@keyframes celebrate {
+    0% { transform: scale(0.5); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* Trash Bin Grid */
+.trash-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+    justify-content: flex-start !important;
+    background: rgba(0, 0, 0, 0.2);
+    min-height: 200px;
+}
+
+.trash-item {
+    width: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    filter: grayscale(0.5);
+}
+
+.trash-item img {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 5px;
+}
+
+.trash-item span {
+    color: #ccc;
+    font-size: 10px;
+    word-wrap: break-word;
+    width: 100%;
+}
